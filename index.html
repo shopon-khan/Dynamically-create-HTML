@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic HTMl Create</title>
+    <style>
+        .user{
+            background-color: lightsalmon;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 5px 5px 10px gray;
+          
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Dynamic Html Creation </h1>
+
+    <div id="userContainer">
+
+    </div>
+
+
+
+
+
+    <script>
+        fetch("https://jsonplaceholder.typicode.com/users")
+        .then(res => res.json())
+        // function call
+        .then(data => showUserName(data));
+        // function create
+        function showUserName(data){
+           let userHTML = '';
+        //    forEach 
+           data.forEach(user => {
+            userHTML = userHTML + ` <div class="user">
+                 <h2> ${user.name} </h2> 
+                <p> Email : ${user.email} </p>
+                <p> ${user.company.name}. ${user.company.catchPhrase}. ${user.company.bs}
+                 </div>`
+           });
+        //    Template create 
+        //    DOM deya html teke id ke anahoycha tar por ul ar vitor innerHtml hesabe lists ke add kore dese.
+           const userContainer = document.getElementById('userContainer');
+           userContainer.innerHTML= userHTML;
+        }
+    </script>
+</body>
+</html>
